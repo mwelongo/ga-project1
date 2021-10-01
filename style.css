@@ -1,0 +1,16 @@
+body {
+  background-color: #fde2e4;
+}
+
+.main-container {
+  display: inline-flex;
+  align-items: center;
+}
+.books {
+  margin-left: 10px;
+  width: 350px;
+}
+
+#top-pics {
+
+}
