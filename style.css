@@ -1,5 +1,5 @@
 body {
-  background-color: #fde2e4;
+  /* background-color: #fde2e4; */
 }
 
 .main-container {
@@ -22,7 +22,7 @@ body {
 
 }
 
-#modalDiv {
+#modal-div {
 	background-color: rgba(0,0,0,0.4);
 	position: fixed;
 	top: 0;

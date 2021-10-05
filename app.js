@@ -2,6 +2,27 @@
 
 
 $(() => {
+
+  // // Modal for each book + CLOSE button + FAV button
+  // const $aboutButton = $('#openModal');
+  // const $modalDiv = $('#modal-div');
+  // const $modalTextBox = $('#modal-textbox');
+  // const $closeBtn = $('#close-btn')
+  //
+  // //// MODAL FUNCTION
+  // /// ===============
+  // const openModal = () => {
+  //   $modalDiv.css('display', 'block')
+  // }
+  //
+  // const closeModal = () => {
+  //   $modalDiv.css('display', 'none')
+  // }
+  //
+  // $aboutButton.on('click', openModal)
+  // // console.log(openModal);
+  // $closeBtn.on('click', closeModal)
+
   // select top-picks and my-favorties
   const $topPicksContainer = $('#top-picks')
   const $myFavorties = $('#my-favorties')
@@ -26,46 +47,57 @@ $(() => {
         const titleText = data.items[i].volumeInfo.title
         const $bookDiv = $('<div>').addClass('book-div')
         $displayBooks.append($bookDiv)
-        // ABOUT button, which will also serve as our modal opener
-        const $aboutButton = $('<button>').addClass('about-book-modal').attr('id', 'openModal').text('ABOUT BOOK')
+        //// ABOUT button, which will also serve as our modal opener
+        const $aboutButton = $('<button>').attr('id', 'openModal').text('ABOUT BOOK')
         $bookDiv.append($aboutButton)
 
         const $bookTitle = $('<h3>').addClass('book-title').text(titleText)
         $bookDiv.append($bookTitle)
-        // const $favoriteButton = $('<button>').addClass('favorite-button').text('FAVORITE')
-        // $bookDiv.append($favoriteButton)
+        //// const $favoriteButton = $('<button>').addClass('favorite-button').text('FAVORITE')
+        //// $bookDiv.append($favoriteButton)
 
 
-        // Modal for each book + CLOSE button + FAV button
+        //// Modal for each book + CLOSE button + FAV button
         const $modalDiv = $('<div>').attr('id','modal-div')
         $bookDiv.append($modalDiv)
         const $modalTextBox = $('<div>').addClass('modal-textbox')
         $modalDiv.append($modalTextBox)
 
-        // h2 and p in the modal
+        //// h2 and p in the modal
         const $modalH3 = $('<h3>').addClass('modal-h3').text(`Book Title: ${titleText}`)
         $modalTextBox.append($modalH3)
 
-        // FAVORITE Button to move the book items to the right column
+        //// FAVORITE Button to move the book items to the right column
         const $favoriteButton = $('<button>').addClass('favorite-button').text('FAVORITE')
         $modalTextBox.append($favoriteButton)
-        // Year, author names
+        //// Year, author names
         const $bookAuthor = $('<p>').addClass('author').text('Author')
         $modalTextBox.append($bookAuthor)
         const $bookYear = $('<p>').addClass('year').text('Year')
         $modalTextBox.append($bookYear)
 
-        // Book description ==> need to find a way to cut text with a ... READ MORE
+        //// Book description ==> need to find a way to cut text with a ... READ MORE
         const bookDescription = data.items[i].volumeInfo.description
-        const $bookDescription = $('<p>').addClass('book-description').text(bookDescription)
+        //// trancate description at 300 chars
+        //// Source: Stack Overflow: https://stackoverflow.com/questions/1301512/truncate-a-string-straight-javascript
+
+        const truncatedDescription = (str='', num) => {
+          if (str.length > num) {
+            return str.slice(0, num) + ' ...'
+          } else {
+            return str;
+          }
+        }
+
+        const $bookDescription = $('<p>').addClass('book-description').text(truncatedDescription(bookDescription, 262));
         $modalTextBox.append($bookDescription)
 
-        // CLOSE button
+        //// CLOSE button
         const $closeBtn = $('<a>').attr('id', 'close-btn').attr('href', '#').text('CLOSE')
         $modalTextBox.append($closeBtn)
 
         //// MODAL FUNCTION
-        /// ===============
+        //// ===============
         const openModal = () => {
           $modalDiv.css('display', 'block')
         }
@@ -90,6 +122,8 @@ $(() => {
         console.log('bad request');
       }
   )
+
+
 
 
 })
