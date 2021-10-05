@@ -23,12 +23,12 @@ body {
 }
 
 #modal-div {
-	background-color: rgba(0,0,0,0.4);
+	background-color: rgba(0,0,0,.6);
 	position: fixed;
 	top: 0;
 	left: 0;
-	height: 100%;
-	width: 100%;
+	height: 50%;
+	width: 20%;
 	z-index: 1;
 	/*This puts our modal in front of the body (which has a default z-index setting of `0`*/
 	overflow: auto;
@@ -42,7 +42,7 @@ body {
 	width: 550px;
 	border-radius: 2px;
 	/* // center the box in the middle of the page */
-	margin: 150px auto; /* top and bottom margins.
+	margin: 150px 10px auto 150px; /* top and bottom margins.
 /*This will set the margins for the top and the bottom to 150px (or larger). The right and left will automatically set themselves (and keep the box centered horizontally).*/
 	box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
 /*This will give the box some depth.*/
