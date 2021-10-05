@@ -3,12 +3,19 @@ body {
 }
 
 .main-container {
-  display: inline-flex;
-  align-items: center;
+  display: flex;
+  align-items: baseline;
 }
-.books {
-  margin-left: 10px;
+.container {
+  margin: 10px;
   width: 350px;
+}
+
+.book-div {
+  margin-bottom: 1em;
+  padding: 1em 3em;
+  border-radius: .5em;
+  border: 1.5px solid red;
 }
 
 #top-pics {
