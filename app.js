@@ -17,7 +17,7 @@ $(() => {
     }
   ).then(
     (data) => {
-      console.log(data);
+      // console.log(data);
       // console.log(data.items[1].volumeInfo.title);
       for (i = 0; i < data.items.length; i++) {
         // console.log(data.items[i].volumeInfo.title);
@@ -25,18 +25,20 @@ $(() => {
         // div for each book (title + book button for MODAL, )
         const titleText = data.items[i].volumeInfo.title
         const $bookDiv = $('<div>').addClass('book-div')
-        const $aboutBookModal = $('<button>').addClass('about-book-modal').text('ABOUT BOOK')
-
-        const $bookTitle = $('<p>').addClass('book-title').text(titleText)
-        // const $favoriteButton = $('<button>').addClass('favorite-button').text('FAVORITE')
-        $bookDiv.append($aboutBookModal)
-        $bookDiv.append($bookTitle)
-        // $bookDiv.append($favoriteButton)
         $displayBooks.append($bookDiv)
+        // ABOUT button, which will also serve as our modal opener
+        const $aboutButton = $('<button>').addClass('about-book-modal').attr('id', 'openModal').text('ABOUT BOOK')
+        $bookDiv.append($aboutButton)
+
+        const $bookTitle = $('<h3>').addClass('book-title').text(titleText)
+        $bookDiv.append($bookTitle)
+        // const $favoriteButton = $('<button>').addClass('favorite-button').text('FAVORITE')
+        // $bookDiv.append($favoriteButton)
+
 
         // Modal for each book + CLOSE button + FAV button
-        const $modalDiv = $('<div>').addClass('modal-div')
-        $aboutBookModal.append($modalDiv)
+        const $modalDiv = $('<div>').attr('id','modal-div')
+        $bookDiv.append($modalDiv)
         const $modalTextBox = $('<div>').addClass('modal-textbox')
         $modalDiv.append($modalTextBox)
 
@@ -62,12 +64,25 @@ $(() => {
         const $closeBtn = $('<a>').attr('id', 'close-btn').attr('href', '#').text('CLOSE')
         $modalTextBox.append($closeBtn)
 
+        //// MODAL FUNCTION
+        /// ===============
+        const openModal = () => {
+          $modalDiv.css('display', 'block')
+        }
+
+        const closeModal = () => {
+          $modalDiv.css('display', '')
+        }
+
+        $aboutButton.on('click', openModal)
+        $closeBtn.on('click', closeModal)
+
         // on-click function for the book div
-        $('button').on('click', (e) => {
-          e.preventDefault()
-          const $clickBook = $(e.currentTarget).val()
-          console.log(`Success! You clicked on ${titleText}`);
-        })
+        // $('button').on('click', (e) => {
+        //   e.preventDefault()
+        //   const $clickBook = $(e.currentTarget).val()
+        //   console.log(`Success! You clicked on ${titleText}`);
+        // })
       }
 
     },
