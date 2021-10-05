@@ -3,10 +3,10 @@
 
 $(() => {
   // select top-picks and my-favorties
-  const $topPicks = $('#top-picks')
+  const $topPicksContainer = $('#top-picks')
   const $myFavorties = $('#my-favorties')
   const $displayBooks = $('<div>').addClass('display-books')
-  $topPicks.append($displayBooks)
+  $topPicksContainer.append($displayBooks)
 
   // // Create buttons to display books
 
@@ -17,21 +17,50 @@ $(() => {
     }
   ).then(
     (data) => {
-      // console.log(data);
+      console.log(data);
       // console.log(data.items[1].volumeInfo.title);
       for (i = 0; i < data.items.length; i++) {
         // console.log(data.items[i].volumeInfo.title);
 
-        // div for each book (title, an img, and a button)
+        // div for each book (title + book button for MODAL, )
         const titleText = data.items[i].volumeInfo.title
-        const $bookDiv = $('<button>').addClass('book-div')
+        const $bookDiv = $('<div>').addClass('book-div')
+        const $aboutBookModal = $('<button>').addClass('about-book-modal').text('ABOUT BOOK')
+
         const $bookTitle = $('<p>').addClass('book-title').text(titleText)
-        const $bookButton = $('<button>').addClass('book-button').text('FAVORITE')
+        // const $favoriteButton = $('<button>').addClass('favorite-button').text('FAVORITE')
+        $bookDiv.append($aboutBookModal)
         $bookDiv.append($bookTitle)
-        $bookDiv.append($bookButton)
+        // $bookDiv.append($favoriteButton)
         $displayBooks.append($bookDiv)
 
-        // Modal for each book to show detail + a close button + favorite button
+        // Modal for each book + CLOSE button + FAV button
+        const $modalDiv = $('<div>').addClass('modal-div')
+        $aboutBookModal.append($modalDiv)
+        const $modalTextBox = $('<div>').addClass('modal-textbox')
+        $modalDiv.append($modalTextBox)
+
+        // h2 and p in the modal
+        const $modalH3 = $('<h3>').addClass('modal-h3').text(`Book Title: ${titleText}`)
+        $modalTextBox.append($modalH3)
+
+        // FAVORITE Button to move the book items to the right column
+        const $favoriteButton = $('<button>').addClass('favorite-button').text('FAVORITE')
+        $modalTextBox.append($favoriteButton)
+        // Year, author names
+        const $bookAuthor = $('<p>').addClass('author').text('Author')
+        $modalTextBox.append($bookAuthor)
+        const $bookYear = $('<p>').addClass('year').text('Year')
+        $modalTextBox.append($bookYear)
+
+        // Book description ==> need to find a way to cut text with a ... READ MORE
+        const bookDescription = data.items[i].volumeInfo.description
+        const $bookDescription = $('<p>').addClass('book-description').text(bookDescription)
+        $modalTextBox.append($bookDescription)
+
+        // CLOSE button
+        const $closeBtn = $('<a>').attr('id', 'close-btn').attr('href', '#').text('CLOSE')
+        $modalTextBox.append($closeBtn)
 
         // on-click function for the book div
         $('button').on('click', (e) => {
