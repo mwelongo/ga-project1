@@ -1,9 +1,10 @@
 body {
   /* background-color: #fde2e4; */
+  max-width: 960px;
 }
 
 .main-container {
-  display: flex;
+  /* display: flex; */
   align-items: baseline;
 }
 .container {
@@ -16,8 +17,14 @@ body {
   padding: 1em 3em;
   border-radius: .5em;
   border: 1.5px solid red;
+  width: 100px;
+  height: 200px;
+  margin: 20px;
 }
 
+.display-books {
+  display: contents;
+}
 #top-pics {
 
 }

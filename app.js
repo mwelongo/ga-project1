@@ -38,19 +38,22 @@ $(() => {
     }
   ).then(
     (data) => {
-      // console.log(data);
+      console.log(data);
       // console.log(data.items[1].volumeInfo.title);
       for (i = 0; i < data.items.length; i++) {
         // console.log(data.items[i].volumeInfo.title);
 
         // div for each book (title + book button for MODAL, )
-        const titleText = data.items[i].volumeInfo.title
+        const backgroundImg = data.items[i].volumeInfo.imageLinks.thumbnail
+        console.log(backgroundImg);
         const $bookDiv = $('<div>').addClass('book-div')
+        $bookDiv.css('background-image', 'url('+backgroundImg+')')
         $displayBooks.append($bookDiv)
         //// ABOUT button, which will also serve as our modal opener
         const $aboutButton = $('<button>').attr('id', 'openModal').text('ABOUT BOOK')
         $bookDiv.append($aboutButton)
 
+        const titleText = data.items[i].volumeInfo.title
         const $bookTitle = $('<h3>').addClass('book-title').text(titleText)
         $bookDiv.append($bookTitle)
         //// const $favoriteButton = $('<button>').addClass('favorite-button').text('FAVORITE')
