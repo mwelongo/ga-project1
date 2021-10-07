@@ -25,7 +25,7 @@ $(() => {
 
   // select top-picks and my-favorties
   const $topPicksContainer = $('#top-picks')
-  const $myFavorties = $('#my-favorties')
+  const $favortiesContainer = $('.favorites-container')
   const $displayBooks = $('<div>').addClass('display-books')
   $topPicksContainer.append($displayBooks)
 
@@ -38,23 +38,25 @@ $(() => {
     }
   ).then(
     (data) => {
-      console.log(data);
+      // console.log(data);
       // console.log(data.items[1].volumeInfo.title);
       for (i = 0; i < data.items.length; i++) {
         // console.log(data.items[i].volumeInfo.title);
 
         // div for each book (title + book button for MODAL, )
-        const backgroundImg = data.items[i].volumeInfo.imageLinks.thumbnail
-        console.log(backgroundImg);
+
         const $bookDiv = $('<div>').addClass('book-div')
-        $bookDiv.css('background-image', 'url('+backgroundImg+')')
+        // $bookDiv.css('background-image', 'url('+backgroundImg+')')
         $displayBooks.append($bookDiv)
         //// ABOUT button, which will also serve as our modal opener
         const $aboutButton = $('<button>').attr('id', 'openModal').text('ABOUT BOOK')
         $bookDiv.append($aboutButton)
 
         const titleText = data.items[i].volumeInfo.title
+        const backgroundImg = data.items[i].volumeInfo.imageLinks.thumbnail
+        // console.log(backgroundImg);
         const $bookTitle = $('<h3>').addClass('book-title').text(titleText)
+        $bookTitle.css('background-image', 'url('+backgroundImg+')')
         $bookDiv.append($bookTitle)
         //// const $favoriteButton = $('<button>').addClass('favorite-button').text('FAVORITE')
         //// $bookDiv.append($favoriteButton)
@@ -71,8 +73,8 @@ $(() => {
         $modalTextBox.append($modalH3)
 
         //// FAVORITE Button to move the book items to the right column
-        const $favoriteButton = $('<button>').addClass('favorite-button').text('FAVORITE')
-        $modalTextBox.append($favoriteButton)
+        const $moveToFavoritesButton = $('<button>').addClass('move-to-favorites').text('FAVORITE')
+        $modalTextBox.append($moveToFavoritesButton)
         //// Year, author names
         const $bookAuthor = $('<p>').addClass('author').text('Author')
         $modalTextBox.append($bookAuthor)
@@ -118,6 +120,15 @@ $(() => {
         //   const $clickBook = $(e.currentTarget).val()
         //   console.log(`Success! You clicked on ${titleText}`);
         // })
+
+        // Events - move to Favorites
+        $moveToFavoritesButton.on('click', () => {
+          $bookDiv.addClass('favorites-item').appendTo('.favorites-container')
+          $aboutButton.text('REMOVE')
+          $modalDiv.remove()
+
+        })
+
       }
 
     },
@@ -127,6 +138,8 @@ $(() => {
   )
 
 
+
+// Modal with the Favorite button
 
 
 })
