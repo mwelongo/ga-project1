@@ -71,7 +71,7 @@ $(() => {
         //// CLOSE button
         const $closeBtn = $('<a>').attr('id', 'close-btn').attr('href', '#').text('CLOSE')
         $modalTextBox.append($closeBtn)
-        
+
         //// h3 and p in the modal
         const $modalH3 = $('<h3>').addClass('modal-h3').text(`Book: ${titleText}`)
         $modalTextBox.append($modalH3)

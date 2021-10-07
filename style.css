@@ -26,6 +26,10 @@ h1 {
   margin: 10px;
 }
 
+.favorites-item {
+    border: none;
+}
+
 .book-title {
   background-color: #grey;
   margin: auto;
@@ -85,6 +89,7 @@ h2 {
 
 h3 {
   font-family: Arial, sans-serif;
+  font-size: 1em;
 }
 
 #openModal {
