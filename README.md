@@ -27,10 +27,10 @@ Project Files (installation)
 - app.js: JavaScript file used for jQuery to add contain to the app/websites, as well as AJAX to call data from the Google Books API.
 - style.css: with styling for the project, including the modals.
 
-Project live site (Netlify): https://books-picks.netlify.app
+Project live site (Netlify): https://book-picks.netlify.app/
 
 
 Unsolved Problems:
 - My goal was for the Favorite button to be a button. When user moves a book to favorites, the books gets added to the button, but doesn't display on the main page. I wanted the user to be able to click on the display button to see their list of favorites.
 - The modal is only display from one position on the screen. I tried to play with different display options, but I didn't seem to fully solve this issue.
-- The Google Books API isn't fully working as expected. For example, some times when you refresh it shows less books, and some times it shows more. 
+- The Google Books API isn't fully working as expected. For example, some times when you refresh it shows less books, and some times it shows more.
