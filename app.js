@@ -42,20 +42,20 @@ $(() => {
       // console.log(data.items[1].volumeInfo.title);
       for (i = 0; i < data.items.length; i++) {
         // console.log(data.items[i].volumeInfo.title);
-
-        // div for each book (title + book button for MODAL, )
-
-        const $bookDiv = $('<div>').addClass('book-div')
-        // $bookDiv.css('background-image', 'url('+backgroundImg+')')
-        $displayBooks.append($bookDiv)
-        //// ABOUT button, which will also serve as our modal opener
-        const $aboutButton = $('<button>').attr('id', 'openModal').text('ABOUT BOOK')
-        $bookDiv.append($aboutButton)
-
         const titleText = data.items[i].volumeInfo.title
         const backgroundImg = data.items[i].volumeInfo.imageLinks.thumbnail
         // console.log(backgroundImg);
-        const $bookTitle = $('<h3>').addClass('book-title').text(titleText)
+
+        // div for each book (title + book button for MODAL, )
+        const $bookDiv = $('<div>').addClass('book-div')
+        $displayBooks.append($bookDiv)
+
+        //// ABOUT button, which will also serve as our modal opener
+        const $aboutButton = $('<button>').attr('id', 'openModal').text(titleText)
+        $bookDiv.append($aboutButton)
+
+        const $bookTitle = $('<h3>').addClass('book-title')
+        // $bookTitle.text(titleText)
         $bookTitle.css('background-image', 'url('+backgroundImg+')')
         $bookDiv.append($bookTitle)
         //// const $favoriteButton = $('<button>').addClass('favorite-button').text('FAVORITE')
@@ -68,17 +68,21 @@ $(() => {
         const $modalTextBox = $('<div>').addClass('modal-textbox')
         $modalDiv.append($modalTextBox)
 
-        //// h2 and p in the modal
-        const $modalH3 = $('<h3>').addClass('modal-h3').text(`Book Title: ${titleText}`)
+        //// CLOSE button
+        const $closeBtn = $('<a>').attr('id', 'close-btn').attr('href', '#').text('CLOSE')
+        $modalTextBox.append($closeBtn)
+        
+        //// h3 and p in the modal
+        const $modalH3 = $('<h3>').addClass('modal-h3').text(`Book: ${titleText}`)
         $modalTextBox.append($modalH3)
 
         //// FAVORITE Button to move the book items to the right column
-        const $moveToFavoritesButton = $('<button>').addClass('move-to-favorites').text('FAVORITE')
+        const $moveToFavoritesButton = $('<button>').addClass('move-to-favorites').text('ADD FAVORITE')
         $modalTextBox.append($moveToFavoritesButton)
         //// Year, author names
-        const $bookAuthor = $('<p>').addClass('author').text('Author')
+        const $bookAuthor = $('<p>').addClass('author').text(`Author(s): ${data.items[i].volumeInfo.authors}`)
         $modalTextBox.append($bookAuthor)
-        const $bookYear = $('<p>').addClass('year').text('Year')
+        const $bookYear = $('<p>').addClass('year').text(`Published: ${(data.items[i].volumeInfo.publishedDate).substring(0, 4)}`)
         $modalTextBox.append($bookYear)
 
         //// Book description ==> need to find a way to cut text with a ... READ MORE
@@ -96,10 +100,6 @@ $(() => {
 
         const $bookDescription = $('<p>').addClass('book-description').text(truncatedDescription(bookDescription, 262));
         $modalTextBox.append($bookDescription)
-
-        //// CLOSE button
-        const $closeBtn = $('<a>').attr('id', 'close-btn').attr('href', '#').text('CLOSE')
-        $modalTextBox.append($closeBtn)
 
         //// MODAL FUNCTION
         //// ===============
